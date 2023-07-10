@@ -4,6 +4,7 @@ import com.project.boardgamerentalfront.MainView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -17,18 +18,25 @@ public class GameForm extends FormLayout {
     private ComboBox<GameType> type = new ComboBox<>("Game type");
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
+    private Button rent = new Button("Rent");
     private GameService service = GameService.getInstance();
     private Binder<Game> binder = new Binder<Game>(Game.class);
 
     public GameForm(MainView mainView) {
+        DatePicker datePicker = new DatePicker("Select date");
+
         type.setItems(GameType.values());
-        HorizontalLayout buttons = new HorizontalLayout(save, delete);
+        HorizontalLayout buttons = new HorizontalLayout(save, delete, rent);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        add(title, price, publicationYear, type, buttons);
+        add(title, price, publicationYear, type, buttons, datePicker);
         binder.bindInstanceFields(this);
         this.mainView = this.mainView;
         save.addClickListener(event -> save());
         delete.addClickListener(event -> delete());
+        rent.addClickListener(event -> rent());
+    }
+
+    private void rent() {
     }
 
     private void save() {

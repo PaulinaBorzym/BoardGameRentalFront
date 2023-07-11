@@ -14,8 +14,6 @@ public class RentService {
 
     private Set<Rent> rents;
     private static RentService rentService;
-    private static UserService userService;
-    private static GameService gameService;
 
 
     private RentService() {

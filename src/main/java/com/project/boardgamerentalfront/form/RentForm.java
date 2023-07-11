@@ -11,6 +11,8 @@ import com.project.boardgamerentalfront.service.UserService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.checkbox.CheckboxGroup;
+import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -32,9 +34,8 @@ public class RentForm extends FormLayout {
     private Button edit = new Button("Edit");
     private RentService service = RentService.getInstance();
     private Binder<Rent> binder = new Binder<Rent>(Rent.class);
+    private CheckboxGroup<String> checkboxGroup = new CheckboxGroup<>();
 
-    private Checkbox checkbox = new Checkbox("Online rules explanation.");
-    private Checkbox checkbox2 = new Checkbox("Send the necessary things for the game (notebook, pen)");
 
 
     public RentForm (MainView mainView){
@@ -48,8 +49,10 @@ public class RentForm extends FormLayout {
         save.addClickListener(event -> save());
         delete.addClickListener(event -> delete());
         edit.addClickListener(event -> edit());
-        add(checkbox);
-        add(checkbox2);
+        checkboxGroup.setLabel("Other options");
+        checkboxGroup.setItems("Online rules explanation", "Send the necessary things for the game (notebook, pen)");
+        checkboxGroup.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
+        add(checkboxGroup);
     }
 
     private void save() {

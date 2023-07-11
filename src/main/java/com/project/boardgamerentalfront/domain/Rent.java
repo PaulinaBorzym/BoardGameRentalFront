@@ -5,10 +5,7 @@ import com.project.boardgamerentalfront.service.UserService;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Rent {
     private User user;
@@ -67,5 +64,18 @@ public class Rent {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rent rent = (Rent) o;
+        return Double.compare(rent.price, price) == 0 && Objects.equals(user, rent.user) && Objects.equals(game, rent.game) && Objects.equals(startDate, rent.startDate) && Objects.equals(endDate, rent.endDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, game, startDate, endDate, price);
     }
 }

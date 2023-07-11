@@ -10,59 +10,77 @@ import com.project.boardgamerentalfront.service.RentService;
 import com.project.boardgamerentalfront.service.UserService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.converter.Converter;
+
+import java.time.LocalDate;
 
 public class RentForm extends FormLayout {
     private MainView mainView;
-    private ComboBox<User> users = new ComboBox<>("Users");
-    private ComboBox<Game> games = new ComboBox<>("Game");
-    DatePicker datePickerStart = new DatePicker("Start date");
-    DatePicker datePickerEnd = new DatePicker("End date");
+    private ComboBox<User> user = new ComboBox<>("Users");
+    private ComboBox<Game> game = new ComboBox<>("Game");
+    DatePicker startDate = new DatePicker("Start date");
+    DatePicker endDate = new DatePicker("End date");
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
+    private Button edit = new Button("Edit");
     private RentService service = RentService.getInstance();
-   // private Binder<Rent> binder = new Binder<Rent>(Rent.class);
+    private Binder<Rent> binder = new Binder<Rent>(Rent.class);
+
+    private Checkbox checkbox = new Checkbox("Online rules explanation.");
+    private Checkbox checkbox2 = new Checkbox("Send the necessary things for the game (notebook, pen)");
 
 
     public RentForm (MainView mainView){
-        users.setItems(UserService.getInstance().getUsers());
-        games.setItems(GameService.getInstance().getGames());
-        HorizontalLayout buttons = new HorizontalLayout(save, delete);
+        user.setItems(UserService.getInstance().getUsers());
+        game.setItems(GameService.getInstance().getGames());
+        HorizontalLayout buttons = new HorizontalLayout(save, delete, edit);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        add(users,games,datePickerStart,datePickerEnd,buttons);
-        //binder.bindInstanceFields(this);
-        this.mainView = this.mainView;
+        add(user,game,startDate,endDate,buttons);
+        binder.bindInstanceFields(this);
+        this.mainView = mainView;
         save.addClickListener(event -> save());
         delete.addClickListener(event -> delete());
+        edit.addClickListener(event -> edit());
+        add(checkbox);
+        add(checkbox2);
     }
 
     private void save() {
-        //Rent rent = binder.getBean();
-        //service.save(rent);
+        Rent rent = binder.getBean();
+        Rent newRent = new Rent(rent.getUser(),rent.getGame(),rent.getStartDate(),rent.getEndDate());
+        service.save(newRent);
         mainView.refresh();
         setRent(null);
     }
+    private void edit() {
+        Rent rent = binder.getBean();
+        service.save(rent);
+        mainView.refresh();
+        setRent(rent);
+    }
 
     private void delete() {
-        //Rent rent = binder.getBean();
-        //service.delete(rent);
+        Rent rent = binder.getBean();
+        service.delete(rent);
         mainView.refresh();
         setRent(null);
     }
 
     public void setRent(Rent rent) {
-        //binder.setBean(rent);
+        binder.setBean(rent);
 
         if (rent == null) {
             setVisible(false);
         } else {
             setVisible(true);
-            users.focus();
+            user.focus();
         }
     }
 }

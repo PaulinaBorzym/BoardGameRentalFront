@@ -26,7 +26,15 @@ public class Rent {
         this.game = game;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.price = game.getPrice()* Double.valueOf(ChronoUnit.DAYS.between(startDate,endDate));
+        price = game.getPrice()* Double.valueOf(ChronoUnit.DAYS.between(startDate,endDate));
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public User getUser() {

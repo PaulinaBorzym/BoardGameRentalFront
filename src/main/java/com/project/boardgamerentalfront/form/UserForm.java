@@ -20,18 +20,20 @@ public class UserForm extends FormLayout {
     private TextField phoneNumber = new TextField("Phone number");
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
+    private Button edit = new Button("Edit");
     private UserService service = UserService.getInstance();
 
     private Binder<User> binder = new Binder<User>(User.class);
 
     public UserForm(MainView mainView) {
-        HorizontalLayout buttons = new HorizontalLayout(save, delete);
+        HorizontalLayout buttons = new HorizontalLayout(save, delete, edit);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         add(firstName, lastName,email,phoneNumber, buttons);
         binder.bindInstanceFields(this);
-        this.mainView = this.mainView;
+        this.mainView = mainView;
         save.addClickListener(event -> save());
         delete.addClickListener(event -> delete());
+        edit.addClickListener(event -> edit());
 
     }
 
@@ -40,6 +42,13 @@ public class UserForm extends FormLayout {
         service.save(user);
         mainView.refresh();
         setUser(null);
+    }
+
+    private void edit() {
+        User user = binder.getBean();
+        service.save(user);
+        mainView.refresh();
+        setUser(user);
     }
 
     public void setUser(User user) {

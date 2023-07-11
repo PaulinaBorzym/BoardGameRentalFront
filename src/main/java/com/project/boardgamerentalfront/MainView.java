@@ -46,13 +46,13 @@ import com.vaadin.flow.router.Route;
        filter.setValueChangeMode(ValueChangeMode.EAGER);
        filter.addValueChangeListener(e -> update());
        grid.setColumns("title", "price", "publicationYear", "type");
+       rentGrid.setColumns("user", "game", "price","startDate", "endDate");
        HorizontalLayout toolbar = new HorizontalLayout(filter, addNewGame, addNewUser, addNewRent);
        HorizontalLayout mainContent = new HorizontalLayout(grid, form);
        HorizontalLayout userContent = new HorizontalLayout(userGrid, userForm);
        HorizontalLayout rentContent = new HorizontalLayout(rentGrid,rentForm);
 
        addNewGame.addClickListener(e -> {
-           //toolbar.setVisible(true);
            mainContent.setVisible(true);
            userContent.setVisible(false);
            rentContent.setVisible(false);
@@ -63,7 +63,6 @@ import com.vaadin.flow.router.Route;
 
 
        addNewUser.addClickListener(e -> {
-          // toolbar.setVisible(true);
            mainContent.setVisible(false);
            userContent.setVisible(true);
            rentContent.setVisible(false);
@@ -74,7 +73,6 @@ import com.vaadin.flow.router.Route;
        });
 
        addNewRent.addClickListener(e -> {
-           // toolbar.setVisible(true);
            rentContent.setVisible(true);
            mainContent.setVisible(false);
            userContent.setVisible(false);

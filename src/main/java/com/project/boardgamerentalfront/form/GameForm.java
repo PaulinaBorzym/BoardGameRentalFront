@@ -21,25 +21,21 @@ public class GameForm extends FormLayout {
     private ComboBox<GameType> type = new ComboBox<>("Game type");
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
-    private Button rent = new Button("Rent");
+    private Button edit = new Button("Edit");
     private GameService service = GameService.getInstance();
     private Binder<Game> binder = new Binder<Game>(Game.class);
 
     public GameForm(MainView mainView) {
-        DatePicker datePicker = new DatePicker("Select date");
 
         type.setItems(GameType.values());
-        HorizontalLayout buttons = new HorizontalLayout(save, delete, rent);
+        HorizontalLayout buttons = new HorizontalLayout(save, delete, edit);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        add(title, price, publicationYear, type, buttons, datePicker);
+        add(title, price, publicationYear, type, buttons);
         binder.bindInstanceFields(this);
-        this.mainView = this.mainView;
+        this.mainView = mainView;
         save.addClickListener(event -> save());
         delete.addClickListener(event -> delete());
-        rent.addClickListener(event -> rent());
-    }
-
-    private void rent() {
+        edit.addClickListener(event -> edit());
     }
 
     private void save() {
@@ -47,6 +43,13 @@ public class GameForm extends FormLayout {
         service.save(game);
         mainView.refresh();
         setGame(null);
+    }
+
+    private void edit() {
+        Game game = binder.getBean();
+        service.save(game);
+        mainView.refresh();
+        setGame(game);
     }
 
     private void delete() {

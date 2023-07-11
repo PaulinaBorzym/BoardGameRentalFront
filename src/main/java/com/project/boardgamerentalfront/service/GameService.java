@@ -1,4 +1,7 @@
-package com.project.boardgamerentalfront.domain;
+package com.project.boardgamerentalfront.service;
+
+import com.project.boardgamerentalfront.domain.Game;
+import com.project.boardgamerentalfront.enums.GameType;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -43,6 +46,7 @@ public class GameService {
         return games.stream().filter(game -> game.getTitle().contains(title))
                 .collect(Collectors.toSet());
     }
+
 
     public void save(Game game) {
         this.games.add(game);

@@ -1,4 +1,6 @@
-package com.project.boardgamerentalfront.domain;
+package com.project.boardgamerentalfront.service;
+
+import com.project.boardgamerentalfront.domain.User;
 
 import java.util.HashSet;
 import java.util.Set;

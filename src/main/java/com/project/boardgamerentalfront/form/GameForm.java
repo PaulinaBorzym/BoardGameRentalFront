@@ -1,6 +1,9 @@
-package com.project.boardgamerentalfront.domain;
+package com.project.boardgamerentalfront.form;
 
 import com.project.boardgamerentalfront.MainView;
+import com.project.boardgamerentalfront.domain.Game;
+import com.project.boardgamerentalfront.enums.GameType;
+import com.project.boardgamerentalfront.service.GameService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;

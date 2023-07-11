@@ -1,5 +1,7 @@
 package com.project.boardgamerentalfront.domain;
 
+import com.project.boardgamerentalfront.enums.GameType;
+
 import java.util.Objects;
 
 public class Game {
@@ -61,5 +63,10 @@ public class Game {
 
     public void setType(GameType type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return title;
     }
 }

@@ -37,7 +37,7 @@ public class RentService {
 
     private Set<Rent> exampleData() {
         Set<Rent> rents = new HashSet<>();
-        rents.add(new Rent(new User("Hania","Bania","bania@hania","465613"),new Game("Grzybobranie",10, "2009", GameType.FOR_KIDS),LocalDate.now(),LocalDate.now().plusDays(7L)));
+        rents.add(new Rent(new User("Hania","Bania","bania@hania","465613"),new Game(1L,"Grzybobranie",10, "2009", GameType.FOR_KIDS),LocalDate.now(),LocalDate.now().plusDays(7L)));
 
         return rents;
     }

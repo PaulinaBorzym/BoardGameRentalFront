@@ -5,6 +5,7 @@ import com.project.boardgamerentalfront.enums.GameType;
 import java.util.Objects;
 
 public class Game {
+    private Long gameId;
     private String title;
     private double price;
     private String publicationYear;
@@ -13,7 +14,8 @@ public class Game {
     public Game() {
     }
 
-    public Game(String title, double price, String publicationYear, GameType type) {
+    public Game(Long gameId,String title, double price, String publicationYear, GameType type) {
+        this.gameId = gameId;
         this.title = title;
         this.price = price;
         this.publicationYear = publicationYear;
@@ -35,6 +37,12 @@ public class Game {
     public GameType getType() {
         return type;
     }
+
+    public Long getGameId() {
+        return gameId;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -64,7 +72,9 @@ public class Game {
     public void setType(GameType type) {
         this.type = type;
     }
-
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
+    }
     @Override
     public String toString() {
         return title;

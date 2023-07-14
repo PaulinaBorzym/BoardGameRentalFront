@@ -20,7 +20,9 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
-
+import jakarta.annotation.PostConstruct;
+import org.atmosphere.config.service.Post;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Route
@@ -53,7 +55,7 @@ import com.vaadin.flow.router.Route;
 
          private TextArea infoField = new TextArea();
 
-
+@Autowired
    public MainView() {
        filter.setPlaceholder("Filter by title...");
        filter.setClearButtonVisible(true);

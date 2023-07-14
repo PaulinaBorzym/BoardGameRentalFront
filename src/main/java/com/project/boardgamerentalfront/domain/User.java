@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class User {
 
+    private Long userId;
     private String firstName;
     private String lastName;
     private String email;
@@ -12,7 +13,8 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String phoneNumber) {
+    public User(Long userId, String firstName, String lastName, String email, String phoneNumber) {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -30,6 +32,14 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName, email, phoneNumber);
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {

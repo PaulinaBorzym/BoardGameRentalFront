@@ -57,14 +57,14 @@ public class RentForm extends FormLayout {
 
     private void save() {
         Rent rent = binder.getBean();
-        Rent newRent = new Rent(rent.getUser(),rent.getGame(),rent.getStartDate(),rent.getEndDate());
+        Rent newRent = new Rent(rent.getId(), rent.getUser(),rent.getGame(),rent.getStartDate(),rent.getEndDate());
         service.save(newRent);
         mainView.refresh();
         setRent(null);
     }
     private void edit() {
         Rent rent = binder.getBean();
-        service.save(rent);
+        service.edit(rent);
         mainView.refresh();
         setRent(rent);
     }

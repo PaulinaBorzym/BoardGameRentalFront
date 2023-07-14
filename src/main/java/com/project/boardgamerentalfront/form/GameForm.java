@@ -47,7 +47,7 @@ public class GameForm extends FormLayout {
 
     private void edit() {
         Game game = binder.getBean();
-        service.save(game);
+        service.edit(game);
         mainView.refresh();
         setGame(game);
     }

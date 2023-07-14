@@ -2,11 +2,12 @@ package com.project.boardgamerentalfront.service;
 
 import com.project.boardgamerentalfront.domain.Game;
 import com.project.boardgamerentalfront.enums.GameType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+
 
 public class GameService {
     private final RestTemplate restTemplate = new RestTemplate();
@@ -14,7 +15,7 @@ public class GameService {
     private static GameService gameService;
 
     private GameService() {
-        this.games = exampleData();
+        this.games = getGames();
     }
 
     public static GameService getInstance() {
@@ -25,12 +26,10 @@ public class GameService {
     }
 
     public Set<Game> getGames() {
-        return new HashSet<>(games);
+        ResponseEntity<Game[]> rs = restTemplate.getForEntity("http://localhost:8080/v1/games",Game[].class);
+        return Arrays.stream(rs.getBody()).collect(Collectors.toSet());
     }
 
-    public void addGames(Game game) {
-        this.games.add(game);
-    }
 
     private Set<Game> exampleData() {
         Set<Game> games = new HashSet<>();
@@ -54,9 +53,13 @@ public class GameService {
         this.games.add(game);
         restTemplate.postForObject("http://localhost:8080/v1/games",game,Game.class);
     }
+    public void edit(Game game){
+        restTemplate.put("http://localhost:8080/v1/games",game,Game.class);
+    }
 
 
     public void delete(Game game) {
         this.games.remove(game);
+        restTemplate.delete("http://localhost:8080/v1/games/"+game.getGameId());
     }
 }

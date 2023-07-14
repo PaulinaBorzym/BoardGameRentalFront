@@ -8,6 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Rent {
+    private Long id;
     private User user;
     private Game game;
     private LocalDate startDate;
@@ -18,12 +19,21 @@ public class Rent {
     public Rent() {
     }
 
-    public Rent(User user, Game game, LocalDate startDate, LocalDate endDate) {
+    public Rent(Long id,User user, Game game, LocalDate startDate, LocalDate endDate) {
+        this.id = id;
         this.user = user;
         this.game = game;
         this.startDate = startDate;
         this.endDate = endDate;
         price = game.getPrice()* Double.valueOf(ChronoUnit.DAYS.between(startDate,endDate));
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public double getPrice() {

@@ -46,7 +46,7 @@ public class UserForm extends FormLayout {
 
     private void edit() {
         User user = binder.getBean();
-        service.save(user);
+        service.edit(user);
         mainView.refresh();
         setUser(user);
     }

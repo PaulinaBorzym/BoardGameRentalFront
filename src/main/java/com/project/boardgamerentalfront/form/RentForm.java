@@ -57,7 +57,7 @@ public class RentForm extends FormLayout {
 
     private void save() {
         Rent rent = binder.getBean();
-        Rent newRent = new Rent(rent.getId(), rent.getUser(),rent.getGame(),rent.getStartDate(),rent.getEndDate());
+        Rent newRent = new Rent(rent.getRentId(), rent.getUser(),rent.getGame(),rent.getStartDate(),rent.getEndDate());
         service.save(newRent);
         mainView.refresh();
         setRent(null);

@@ -4,6 +4,9 @@ import com.project.boardgamerentalfront.domain.Game;
 import com.project.boardgamerentalfront.domain.Rent;
 import com.project.boardgamerentalfront.domain.User;
 import com.project.boardgamerentalfront.enums.GameType;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,7 +36,6 @@ public class RentService {
     public Set<Rent> getRents() {
         ResponseEntity<Rent[]> rs = restTemplate.getForEntity("http://localhost:8080/v1/rents",Rent[].class);
         return Arrays.stream(rs.getBody()).collect(Collectors.toSet());
-        //return new HashSet<Rent>();
     }
 
 
@@ -51,7 +53,8 @@ public class RentService {
 
 
     public void save(Rent rent) {
-        restTemplate.postForObject("http://localhost:8080/v1/rents",rent,Rent.class);
+        this.rents.add(rent);
+        restTemplate.postForObject("http://localhost:8080/v1/rents", rent, Rent.class);
     }
 
     public void edit(Rent rent) {
@@ -59,6 +62,7 @@ public class RentService {
     }
 
     public void delete(Rent rent) {
-        restTemplate.delete("http://localhost:8080/v1/rents/"+rent.getId());
+        this.rents.remove(rent);
+        restTemplate.delete("http://localhost:8080/v1/rents/"+rent.getRentId());
     }
 }

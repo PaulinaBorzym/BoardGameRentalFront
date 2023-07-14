@@ -1,12 +1,12 @@
 package com.project.boardgamerentalfront.service;
 
-import com.project.boardgamerentalfront.domain.Game;
 import com.project.boardgamerentalfront.domain.Statistic;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class StatisticService {
+    private final RestTemplate restTemplate = new RestTemplate();
     private Statistic statistics;
     private static StatisticService statisticService;
 
@@ -36,28 +36,36 @@ public class StatisticService {
 
 
     public int getNumberOfUsers() {
-        return statistics.getNumberOfUsers();
+        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfUsers", Integer.class);
+        return rs.getBody();
     }
     public int getNumberOfGames() {
-        return statistics.getNumberOfGames();
+        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfGames", Integer.class);
+        return rs.getBody();
     }
     public int getNumberOfAllRents() {
-        return statistics.getNumberOfAllRents();
+        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfAllRents", Integer.class);
+        return rs.getBody();
     }
     public int getNumberOfLastMonthRents() {
-        return statistics.getNumberOfLastMonthRents();
+        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastMonthRents", Integer.class);
+        return rs.getBody();
     }
     public int getNumberOfLastWeekRents() {
-        return statistics.getNumberOfLastWeekRents();
+        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastWeekRents", Integer.class);
+        return rs.getBody();
     }
     public double getAmountOfAllEarnedMoney() {
-        return statistics.getAmountOfAllEarnedMoney();
+        ResponseEntity<Double> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfAllEarnedMoney", Double.class);
+        return rs.getBody();
     }
     public double getAmountOfLastMonthEarnedMoney() {
-        return statistics.getAmountOfLastMonthEarnedMoney();
+        ResponseEntity<Double> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastMonthEarnedMoney", Double.class);
+        return rs.getBody();
     }
     public double getAmountOfLastWeekEarnedMoney() {
-        return statistics.getAmountOfLastWeekEarnedMoney();
+        ResponseEntity<Double> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastWeekEarnedMoney", Double.class);
+        return rs.getBody();
     }
 
 }

@@ -15,6 +15,17 @@ public class Statistic {
     public Statistic() {
     }
 
+    public Statistic(int numberOfUsers, int numberOfGames, int numberOfAllRents, int numberOfLastMonthRents, int numberOfLastWeekRents, double amountOfAllEarnedMoney, double amountOfLastMonthEarnedMoney, double amountOfLastWeekEarnedMoney) {
+        this.numberOfUsers = numberOfUsers;
+        this.numberOfGames = numberOfGames;
+        this.numberOfAllRents = numberOfAllRents;
+        this.numberOfLastMonthRents = numberOfLastMonthRents;
+        this.numberOfLastWeekRents = numberOfLastWeekRents;
+        this.amountOfAllEarnedMoney = amountOfAllEarnedMoney;
+        this.amountOfLastMonthEarnedMoney = amountOfLastMonthEarnedMoney;
+        this.amountOfLastWeekEarnedMoney = amountOfLastWeekEarnedMoney;
+    }
+
     public int getNumberOfUsers() {
         return numberOfUsers;
     }

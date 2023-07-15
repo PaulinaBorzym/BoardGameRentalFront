@@ -40,34 +40,42 @@ public class StatisticForm extends FormLayout {
     }
 
     private void amountOfLastWeekEarnedMoney() {
-        mainView.refreshInfoField("Amount of last week earned money: " +String.valueOf(statisticService.getAmountOfLastWeekEarnedMoney()));
+        mainView.refreshInfoField("Amount of last week earned money: " +
+                String.valueOf(statisticService.getAmountOfLastWeekEarnedMoney())+" "+mainView.getCurrentCurrency());
     }
 
     private void amountOfLastMonthEarnedMoney() {
-        mainView.refreshInfoField("Amount of last month earned money: " +String.valueOf(statisticService.getAmountOfLastMonthEarnedMoney()));
+        mainView.refreshInfoField("Amount of last month earned money: " +
+                String.valueOf(statisticService.getAmountOfLastMonthEarnedMoney())+" "+mainView.getCurrentCurrency());
     }
 
     private void amountOfAllEarnedMoney() {
-        mainView.refreshInfoField("Amount of all earned money: " +String.valueOf(statisticService.getAmountOfAllEarnedMoney()));
+        mainView.refreshInfoField("Amount of all earned money: " +
+                String.valueOf(statisticService.getAmountOfAllEarnedMoney())+" "+mainView.getCurrentCurrency());
     }
 
     private void numberOfLastWeekRents() {
-        mainView.refreshInfoField("Number of last week rents: " +String.valueOf(statisticService.getNumberOfLastWeekRents()));
+        mainView.refreshInfoField("Number of last week rents: " +
+                String.valueOf(statisticService.getNumberOfLastWeekRents()));
     }
 
     private void numberOfLastMonthRents() {
-        mainView.refreshInfoField("Number of last month rents: " +String.valueOf(statisticService.getNumberOfLastMonthRents()));
+        mainView.refreshInfoField("Number of last month rents: " +
+                String.valueOf(statisticService.getNumberOfLastMonthRents()));
     }
 
     private void numberOfAllRents() {
-        mainView.refreshInfoField("Number of all rents: " +String.valueOf(statisticService.getNumberOfAllRents()));
+        mainView.refreshInfoField("Number of all rents: " +
+                String.valueOf(statisticService.getNumberOfAllRents()));
     }
 
     private void numberOfGames() {
-        mainView.refreshInfoField("Number of games: " +String.valueOf(statisticService.getNumberOfGames()));
+        mainView.refreshInfoField("Number of games: " +
+                String.valueOf(statisticService.getNumberOfGames()));
     }
 
     private void numberOfUsers() {
-        mainView.refreshInfoField("Number of users: " +String.valueOf(statisticService.getNumberOfUsers()));
+        mainView.refreshInfoField("Number of users: " +
+                String.valueOf(statisticService.getNumberOfUsers()));
     }
 }

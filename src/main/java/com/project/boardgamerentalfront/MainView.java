@@ -21,6 +21,8 @@ import jakarta.annotation.PostConstruct;
 import org.atmosphere.config.service.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Objects;
+
 
 @Route
  public class MainView extends VerticalLayout {
@@ -29,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
          private UserService userService = UserService.getInstance();
          private RentService rentService = RentService.getInstance();
+         private MonthStatisticService monthStatisticService = MonthStatisticService.getInstance();
          private CurrencyService currencyService = CurrencyService.getInstance();
 
          private StatisticService statisticService = StatisticService.getInstance();
@@ -36,6 +39,7 @@ import org.springframework.beans.factory.annotation.Autowired;
          private Grid<Game> grid = new Grid<>(Game.class);
          private Grid<User> userGrid = new Grid<>(User.class);
          private Grid<Rent> rentGrid = new Grid<>(Rent.class);
+         private Grid<MonthStatistic> monthStatisticGrid = new Grid<>(MonthStatistic.class);
          private TextField filter = new TextField();
 
          private GameForm form = new GameForm(this);
@@ -48,6 +52,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
          private Button addNewRent = new Button("Add new rent");
          private Button statisticsButton = new Button("Statistics");
+         private Button monthStatisticButton = new Button("Month Statistics");
          private ComboBox<Currency> currency = new ComboBox<>("Currency");
          private Button changeCurrency = new Button("Change currency");
 
@@ -60,25 +65,30 @@ import org.springframework.beans.factory.annotation.Autowired;
        filter.setValueChangeMode(ValueChangeMode.EAGER);
        filter.addValueChangeListener(e -> update());
        grid.setColumns("title", "price", "publicationYear", "type");
+       monthStatisticGrid.setColumns("month", "year", "numberOfUsers", "numberOfGames",
+               "numberOfAllRents", "numberOfLastMonthRents", "amountOfLastMonthEarnedMoney");
        rentGrid.setColumns("user", "game", "price","startDate", "endDate");
        currency.setItems(Currency.values());
        infoField.setReadOnly(true);
        infoField.setSizeFull();
        HorizontalLayout toolbar = new HorizontalLayout(filter, addNewGame, addNewUser, addNewRent,
-               statisticsButton, currency, changeCurrency);
+               statisticsButton, monthStatisticButton, currency, changeCurrency);
        HorizontalLayout mainContent = new HorizontalLayout(grid, form);
        HorizontalLayout userContent = new HorizontalLayout(userGrid, userForm);
        HorizontalLayout rentContent = new HorizontalLayout(rentGrid,rentForm);
        HorizontalLayout statisticContent = new HorizontalLayout(statisticForm, infoField);
+       HorizontalLayout monthStatisticContent = new HorizontalLayout(monthStatisticGrid);
 
        addNewGame.addClickListener(e -> {
            mainContent.setVisible(true);
            userContent.setVisible(false);
            rentContent.setVisible(false);
            statisticContent.setVisible(false);
+           monthStatisticContent.setVisible(false);
            grid.asSingleSelect().clear();
            form.setGame(new Game());
            add(toolbar,mainContent);
+           refresh();
        });
 
 
@@ -87,10 +97,12 @@ import org.springframework.beans.factory.annotation.Autowired;
            userContent.setVisible(true);
            rentContent.setVisible(false);
            statisticContent.setVisible(false);
+           monthStatisticContent.setVisible(false);
            userGrid.setSizeFull();
            userGrid.asSingleSelect().clear();
            userForm.setUser(new User());
            add(toolbar, userContent);
+           refresh();
        });
 
        addNewRent.addClickListener(e -> {
@@ -98,18 +110,32 @@ import org.springframework.beans.factory.annotation.Autowired;
            mainContent.setVisible(false);
            userContent.setVisible(false);
            statisticContent.setVisible(false);
+           monthStatisticContent.setVisible(false);
            rentGrid.setSizeFull();
            rentGrid.asSingleSelect().clear();
            rentForm.setRent(new Rent());
            add(toolbar, rentContent);
+           refresh();
        });
        statisticsButton.addClickListener(e -> {
            rentContent.setVisible(false);
            mainContent.setVisible(false);
            userContent.setVisible(false);
            statisticContent.setVisible(true);
-           //statisticForm.set(new Rent());
+           monthStatisticContent.setVisible(false);
            add(toolbar, statisticContent);
+           refresh();
+       });
+
+       monthStatisticButton.addClickListener(event -> {
+           rentContent.setVisible(false);
+           mainContent.setVisible(false);
+           userContent.setVisible(false);
+           statisticContent.setVisible(false);
+           monthStatisticContent.setVisible(true);
+           add(toolbar, monthStatisticContent);
+           refresh();
+
        });
 
        changeCurrency.addClickListener(e -> {
@@ -124,6 +150,8 @@ import org.springframework.beans.factory.annotation.Autowired;
        rentContent.setSizeFull();
        rentGrid.setSizeFull();
        statisticContent.setSizeFull();
+       monthStatisticGrid.setSizeFull();
+       monthStatisticContent.setSizeFull();
 
        add(toolbar, mainContent);
        form.setGame(null);
@@ -142,6 +170,7 @@ import org.springframework.beans.factory.annotation.Autowired;
         grid.setItems(gameService.getGames());
         userGrid.setItems(userService.getUsers());
         rentGrid.setItems(rentService.getRents());
+        monthStatisticGrid.setItems(monthStatisticService.getMonthStatistic());
     }
     public void refreshInfoField(String info){
        infoField.setValue(info);
@@ -151,6 +180,9 @@ import org.springframework.beans.factory.annotation.Autowired;
         grid.setItems(gameService.findByTitle(filter.getValue()));
         userGrid.setItems(userService.findByPhoneNumber(filter.getValue()));
         rentGrid.setItems(rentService.findByPhoneNumber(filter.getValue()));
+    }
+    public String getCurrentCurrency(){
+    return (Objects.isNull(currency.getValue())) ? "PLN" : currency.getValue().toString();
     }
 
 }

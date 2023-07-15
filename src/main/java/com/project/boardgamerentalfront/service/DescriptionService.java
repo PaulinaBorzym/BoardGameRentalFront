@@ -23,6 +23,9 @@ public class DescriptionService {
     }
 
     public String changeLanguage(String description, String language){
+        if(language == null){
+            language = "PL";
+        }
         ResponseEntity<String> rs = restTemplate.getForEntity(
                 "http://localhost:8080/v1/description?language={language}&description={description}",String.class,
                 language,description);

@@ -31,17 +31,17 @@ public class GameService {
     }
 
 
-    private Set<Game> exampleData() {
-        Set<Game> games = new HashSet<>();
-        games.add(new Game(2L,"Kalambury", 10,  "2015", GameType.FAMILY));
-        games.add(new Game(1L,"Grzybobranie",10, "2009", GameType.FOR_KIDS));
-        games.add(new Game(3L, "PartyTime", 15, "2012", GameType.PARTY));
-        games.add(new Game(4L,"I know", 20, "2012", GameType.FAMILY));
-        games.add(new Game(5L,"Na skrzydłach", 20, "2019", GameType.STRATEGIC));
-        games.add(new Game(6L,"Pojedynek", 15, "2019", GameType.STRATEGIC));
-        games.add(new Game(7L,"Monopol", 10, "2019", GameType.FAMILY));
-        return games;
-    }
+//    private Set<Game> exampleData() {
+//        Set<Game> games = new HashSet<>();
+//        games.add(new Game(2L,"Kalambury", 10,  "2015", GameType.FAMILY));
+//        games.add(new Game(1L,"Grzybobranie",10, "2009", GameType.FOR_KIDS));
+//        games.add(new Game(3L, "PartyTime", 15, "2012", GameType.PARTY));
+//        games.add(new Game(4L,"I know", 20, "2012", GameType.FAMILY));
+//        games.add(new Game(5L,"Na skrzydłach", 20, "2019", GameType.STRATEGIC));
+//        games.add(new Game(6L,"Pojedynek", 15, "2019", GameType.STRATEGIC));
+//        games.add(new Game(7L,"Monopol", 10, "2019", GameType.FAMILY));
+//        return games;
+//    }
 
     public Set<Game> findByTitle(String title) {
         return games.stream().filter(game -> game.getTitle().contains(title))

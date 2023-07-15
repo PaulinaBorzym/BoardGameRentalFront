@@ -7,10 +7,7 @@ import com.project.boardgamerentalfront.form.GameForm;
 import com.project.boardgamerentalfront.form.RentForm;
 import com.project.boardgamerentalfront.form.StatisticForm;
 import com.project.boardgamerentalfront.form.UserForm;
-import com.project.boardgamerentalfront.service.GameService;
-import com.project.boardgamerentalfront.service.RentService;
-import com.project.boardgamerentalfront.service.StatisticService;
-import com.project.boardgamerentalfront.service.UserService;
+import com.project.boardgamerentalfront.service.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
@@ -32,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
          private UserService userService = UserService.getInstance();
          private RentService rentService = RentService.getInstance();
+         private CurrencyService currencyService = CurrencyService.getInstance();
 
          private StatisticService statisticService = StatisticService.getInstance();
 
@@ -66,7 +64,8 @@ import org.springframework.beans.factory.annotation.Autowired;
        currency.setItems(Currency.values());
        infoField.setReadOnly(true);
        infoField.setSizeFull();
-       HorizontalLayout toolbar = new HorizontalLayout(filter, addNewGame, addNewUser, addNewRent, statisticsButton, currency, changeCurrency);
+       HorizontalLayout toolbar = new HorizontalLayout(filter, addNewGame, addNewUser, addNewRent,
+               statisticsButton, currency, changeCurrency);
        HorizontalLayout mainContent = new HorizontalLayout(grid, form);
        HorizontalLayout userContent = new HorizontalLayout(userGrid, userForm);
        HorizontalLayout rentContent = new HorizontalLayout(rentGrid,rentForm);
@@ -113,7 +112,10 @@ import org.springframework.beans.factory.annotation.Autowired;
            add(toolbar, statisticContent);
        });
 
-
+       changeCurrency.addClickListener(e -> {
+           currencyService.changeCurrency(currency.getValue().toString());
+           refresh();
+       });
 
        mainContent.setSizeFull();
        grid.setSizeFull();

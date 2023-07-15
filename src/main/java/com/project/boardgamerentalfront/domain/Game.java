@@ -11,15 +11,27 @@ public class Game {
     private String publicationYear;
     private GameType type;
 
+    private String description;
+
     public Game() {
     }
 
-    public Game(Long gameId,String title, double price, String publicationYear, GameType type) {
+    public Game(Long gameId,String title, double price, String publicationYear, GameType type, String description) {
         this.gameId = gameId;
         this.title = title;
         this.price = price;
         this.publicationYear = publicationYear;
         this.type = type;
+        this.description = description;
+    }
+
+    public String getDescription() {
+
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getTitle() {

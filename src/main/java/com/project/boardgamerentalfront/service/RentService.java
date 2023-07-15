@@ -39,12 +39,12 @@ public class RentService {
     }
 
 
-    private Set<Rent> exampleData() {
-        Set<Rent> rents = new HashSet<>();
-        rents.add(new Rent(1l,new User(1L,"Hania","Bania","bania@hania","465613"),new Game(1L,"Grzybobranie",10, "2009", GameType.FOR_KIDS),LocalDate.now(),LocalDate.now().plusDays(7L)));
-
-        return rents;
-    }
+//    private Set<Rent> exampleData() {
+//        Set<Rent> rents = new HashSet<>();
+//        rents.add(new Rent(1l,new User(1L,"Hania","Bania","bania@hania","465613"),new Game(1L,"Grzybobranie",10, "2009", GameType.FOR_KIDS),LocalDate.now(),LocalDate.now().plusDays(7L)));
+//
+//        return rents;
+//    }
 
     public Set<Rent> findByPhoneNumber(String number) {
         return rents.stream().filter(rent -> rent.getUser().getPhoneNumber().contains(number))

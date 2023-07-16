@@ -1,10 +1,12 @@
 package com.project.boardgamerentalfront.form;
 
 import com.project.boardgamerentalfront.MainView;
+import com.project.boardgamerentalfront.domain.BookCall;
 import com.project.boardgamerentalfront.domain.Game;
 import com.project.boardgamerentalfront.domain.Rent;
 import com.project.boardgamerentalfront.domain.User;
 import com.project.boardgamerentalfront.enums.GameType;
+import com.project.boardgamerentalfront.service.BookCallService;
 import com.project.boardgamerentalfront.service.GameService;
 import com.project.boardgamerentalfront.service.RentService;
 import com.project.boardgamerentalfront.service.UserService;
@@ -17,11 +19,8 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.converter.Converter;
 
-import java.time.LocalDate;
 
 public class RentForm extends FormLayout {
     private MainView mainView;
@@ -29,11 +28,16 @@ public class RentForm extends FormLayout {
     private ComboBox<Game> game = new ComboBox<>("Game");
     DatePicker startDate = new DatePicker("Start date");
     DatePicker endDate = new DatePicker("End date");
+    DatePicker bookDate = new DatePicker("Call date");
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
     private Button edit = new Button("Edit");
+
+    private Button accept = new Button("Book a call");
     private RentService service = RentService.getInstance();
+    private BookCallService bookCallService = BookCallService.getInstance();
     private Binder<Rent> binder = new Binder<Rent>(Rent.class);
+    private Binder<BookCall> bookCallBinder = new Binder<BookCall>(BookCall.class);
     private CheckboxGroup<String> checkboxGroup = new CheckboxGroup<>();
 
 
@@ -49,10 +53,17 @@ public class RentForm extends FormLayout {
         save.addClickListener(event -> save());
         delete.addClickListener(event -> delete());
         edit.addClickListener(event -> edit());
+        accept.addClickListener(event -> accept());
         checkboxGroup.setLabel("Other options");
-        checkboxGroup.setItems("Online rules explanation", "Send the necessary things for the game (notebook, pen)");
+        checkboxGroup.setItems("Online rules explanation");
         checkboxGroup.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
-        add(checkboxGroup);
+        add(checkboxGroup,bookDate,accept);
+    }
+
+    private void accept() {
+        BookCall bookCall = new BookCall(bookDate.getValue(), user.getValue().getPhoneNumber(), game.getValue().getTitle());
+        bookCallService.save(bookCall);
+        mainView.refresh();
     }
 
     private void save() {

@@ -21,6 +21,10 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.data.binder.Binder;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 
 public class RentForm extends FormLayout {
     private MainView mainView;
@@ -32,22 +36,24 @@ public class RentForm extends FormLayout {
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
     private Button edit = new Button("Edit");
-
     private Button accept = new Button("Book a call");
     private RentService service = RentService.getInstance();
     private BookCallService bookCallService = BookCallService.getInstance();
+
+    private UserService userService = UserService.getInstance();
+
+    private GameService gameService = GameService.getInstance();
     private Binder<Rent> binder = new Binder<Rent>(Rent.class);
     private Binder<BookCall> bookCallBinder = new Binder<BookCall>(BookCall.class);
     private CheckboxGroup<String> checkboxGroup = new CheckboxGroup<>();
 
 
-
-    public RentForm (MainView mainView){
+    public RentForm(MainView mainView) {
         user.setItems(UserService.getInstance().getUsers());
         game.setItems(GameService.getInstance().getGames());
         HorizontalLayout buttons = new HorizontalLayout(save, delete, edit);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        add(user,game,startDate,endDate,buttons);
+        add(user, game, startDate, endDate, buttons);
         binder.bindInstanceFields(this);
         this.mainView = mainView;
         save.addClickListener(event -> save());
@@ -57,27 +63,31 @@ public class RentForm extends FormLayout {
         checkboxGroup.setLabel("Other options");
         checkboxGroup.setItems("Online rules explanation");
         checkboxGroup.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
-        add(checkboxGroup,bookDate,accept);
+        add(checkboxGroup, bookDate, accept);
     }
 
     private void accept() {
         BookCall bookCall = new BookCall(bookDate.getValue(), user.getValue().getPhoneNumber(), game.getValue().getTitle());
         bookCallService.save(bookCall);
         mainView.refresh();
+        refreshComboBox();
     }
 
     private void save() {
         Rent rent = binder.getBean();
-        Rent newRent = new Rent(rent.getRentId(), rent.getUser(),rent.getGame(),rent.getStartDate(),rent.getEndDate());
+        Rent newRent = new Rent(rent.getRentId(), rent.getUser(), rent.getGame(), rent.getStartDate(), rent.getEndDate());
         service.save(newRent);
         mainView.refresh();
         setRent(null);
+        refreshComboBox();
     }
+
     private void edit() {
         Rent rent = binder.getBean();
         service.edit(rent);
         mainView.refresh();
         setRent(rent);
+        refreshComboBox();
     }
 
     private void delete() {
@@ -85,6 +95,7 @@ public class RentForm extends FormLayout {
         service.delete(rent);
         mainView.refresh();
         setRent(null);
+        refreshComboBox();
     }
 
     public void setRent(Rent rent) {
@@ -96,5 +107,14 @@ public class RentForm extends FormLayout {
             setVisible(true);
             user.focus();
         }
+        refreshComboBox();
+    }
+
+    public void refreshComboBox() {
+        user.setItems(userService.getUsers());
+        Set<Game> games = gameService.getGames();
+        List<Game> rentedGames = service.getRents().stream().map(rent -> rent.getGame()).collect(Collectors.toList());
+        List<Game> gameForRent = games.stream().filter(game1 -> !rentedGames.contains(game1)).collect(Collectors.toList());
+        game.setItems(gameForRent);
     }
 }

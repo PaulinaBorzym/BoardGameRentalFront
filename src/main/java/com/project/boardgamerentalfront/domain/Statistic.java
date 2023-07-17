@@ -15,7 +15,9 @@ public class Statistic {
     public Statistic() {
     }
 
-    public Statistic(int numberOfUsers, int numberOfGames, int numberOfAllRents, int numberOfLastMonthRents, int numberOfLastWeekRents, double amountOfAllEarnedMoney, double amountOfLastMonthEarnedMoney, double amountOfLastWeekEarnedMoney) {
+    public Statistic(int numberOfUsers, int numberOfGames, int numberOfAllRents, int numberOfLastMonthRents,
+                     int numberOfLastWeekRents, double amountOfAllEarnedMoney, double amountOfLastMonthEarnedMoney,
+                     double amountOfLastWeekEarnedMoney) {
         this.numberOfUsers = numberOfUsers;
         this.numberOfGames = numberOfGames;
         this.numberOfAllRents = numberOfAllRents;
@@ -95,11 +97,19 @@ public class Statistic {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Statistic statistic = (Statistic) o;
-        return numberOfUsers == statistic.numberOfUsers && numberOfGames == statistic.numberOfGames && numberOfAllRents == statistic.numberOfAllRents && numberOfLastMonthRents == statistic.numberOfLastMonthRents && numberOfLastWeekRents == statistic.numberOfLastWeekRents && Double.compare(statistic.amountOfAllEarnedMoney, amountOfAllEarnedMoney) == 0 && Double.compare(statistic.amountOfLastMonthEarnedMoney, amountOfLastMonthEarnedMoney) == 0 && Double.compare(statistic.amountOfLastWeekEarnedMoney, amountOfLastWeekEarnedMoney) == 0;
+        return numberOfUsers == statistic.numberOfUsers &&
+                numberOfGames == statistic.numberOfGames &&
+                numberOfAllRents == statistic.numberOfAllRents &&
+                numberOfLastMonthRents == statistic.numberOfLastMonthRents &&
+                numberOfLastWeekRents == statistic.numberOfLastWeekRents &&
+                Double.compare(statistic.amountOfAllEarnedMoney, amountOfAllEarnedMoney) == 0 &&
+                Double.compare(statistic.amountOfLastMonthEarnedMoney, amountOfLastMonthEarnedMoney) == 0 &&
+                Double.compare(statistic.amountOfLastWeekEarnedMoney, amountOfLastWeekEarnedMoney) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberOfUsers, numberOfGames, numberOfAllRents, numberOfLastMonthRents, numberOfLastWeekRents, amountOfAllEarnedMoney, amountOfLastMonthEarnedMoney, amountOfLastWeekEarnedMoney);
+        return Objects.hash(numberOfUsers, numberOfGames, numberOfAllRents, numberOfLastMonthRents,
+                numberOfLastWeekRents, amountOfAllEarnedMoney, amountOfLastMonthEarnedMoney, amountOfLastWeekEarnedMoney);
     }
 }

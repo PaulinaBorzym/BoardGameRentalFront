@@ -3,7 +3,6 @@ package com.project.boardgamerentalfront.domain;
 import java.util.Objects;
 
 public class User {
-
     private Long userId;
     private String firstName;
     private String lastName;
@@ -26,7 +25,8 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber);
+        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) &&
+                Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber);
     }
 
     @Override

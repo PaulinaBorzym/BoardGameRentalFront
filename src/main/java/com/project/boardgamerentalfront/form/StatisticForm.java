@@ -3,12 +3,8 @@ package com.project.boardgamerentalfront.form;
 import com.project.boardgamerentalfront.MainView;
 import com.project.boardgamerentalfront.service.StatisticService;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.component.textfield.TextField;
 
 public class StatisticForm extends FormLayout {
     private MainView mainView;
@@ -20,7 +16,6 @@ public class StatisticForm extends FormLayout {
     private Button amountOfAllEarnedMoney = new Button("Amount of all earned money");
     private Button amountOfLastMonthEarnedMoney = new Button("Amount of last month earned money");
     private Button amountOfLastWeekEarnedMoney = new Button("Amount of last week earned money");
-
     private StatisticService statisticService = StatisticService.getInstance();
 
     public StatisticForm(MainView mainView) {

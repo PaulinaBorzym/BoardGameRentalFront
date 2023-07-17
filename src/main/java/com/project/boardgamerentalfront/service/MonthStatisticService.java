@@ -1,6 +1,5 @@
 package com.project.boardgamerentalfront.service;
 
-import com.project.boardgamerentalfront.domain.Game;
 import com.project.boardgamerentalfront.domain.MonthStatistic;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -25,7 +24,7 @@ public class MonthStatisticService {
 
     public Set<MonthStatistic> getMonthStatistic() {
         ResponseEntity<MonthStatistic[]> rs = restTemplate.getForEntity(
-                "http://localhost:8080/v1/statistic/month",MonthStatistic[].class);
+                "http://localhost:8080/v1/statistic/month", MonthStatistic[].class);
         return Arrays.stream(rs.getBody()).collect(Collectors.toSet());
     }
 }

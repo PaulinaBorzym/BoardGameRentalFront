@@ -4,7 +4,6 @@ import com.project.boardgamerentalfront.MainView;
 import com.project.boardgamerentalfront.domain.Game;
 import com.project.boardgamerentalfront.enums.GameType;
 import com.project.boardgamerentalfront.enums.Languages;
-import com.project.boardgamerentalfront.service.CurrencyService;
 import com.project.boardgamerentalfront.service.DescriptionService;
 import com.project.boardgamerentalfront.service.GameService;
 import com.vaadin.flow.component.button.Button;
@@ -26,18 +25,14 @@ public class GameForm extends FormLayout {
     private ComboBox<Languages> languages = new ComboBox<>("Language");
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
-
     private Button edit = new Button("Edit");
     private Button changeLanguage = new Button("Change language");
     private GameService service = GameService.getInstance();
-
     private DescriptionService descriptionService = DescriptionService.getInstance();
     private Binder<Game> binder = new Binder<Game>(Game.class);
-
     private TextArea descriptionTextArea = new TextArea();
 
     public GameForm(MainView mainView) {
-
         type.setItems(GameType.values());
         HorizontalLayout buttons = new HorizontalLayout(save, delete, edit);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -51,7 +46,6 @@ public class GameForm extends FormLayout {
         delete.addClickListener(event -> delete());
         edit.addClickListener(event -> edit());
         changeLanguage.addClickListener(event -> changeLanguage());
-
     }
 
     private void changeLanguage() {
@@ -84,7 +78,6 @@ public class GameForm extends FormLayout {
 
     public void setGame(Game game) {
         binder.setBean(game);
-
         if (game == null) {
             setVisible(false);
         } else {

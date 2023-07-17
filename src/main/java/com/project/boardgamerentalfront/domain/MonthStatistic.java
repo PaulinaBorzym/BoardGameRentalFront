@@ -94,12 +94,17 @@ public class MonthStatistic {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MonthStatistic that = (MonthStatistic) o;
-        return numberOfUsers == that.numberOfUsers && numberOfGames == that.numberOfGames && numberOfAllRents == that.numberOfAllRents && numberOfLastMonthRents == that.numberOfLastMonthRents && Double.compare(that.amountOfLastMonthEarnedMoney, amountOfLastMonthEarnedMoney) == 0 && Objects.equals(statisticId, that.statisticId) && Objects.equals(month, that.month) && Objects.equals(year, that.year);
+        return numberOfUsers == that.numberOfUsers && numberOfGames == that.numberOfGames &&
+                numberOfAllRents == that.numberOfAllRents && numberOfLastMonthRents == that.numberOfLastMonthRents &&
+                Double.compare(that.amountOfLastMonthEarnedMoney, amountOfLastMonthEarnedMoney) == 0 &&
+                Objects.equals(statisticId, that.statisticId) && Objects.equals(month, that.month) &&
+                Objects.equals(year, that.year);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(statisticId, month, year, numberOfUsers, numberOfGames, numberOfAllRents, numberOfLastMonthRents, amountOfLastMonthEarnedMoney);
+        return Objects.hash(statisticId, month, year, numberOfUsers, numberOfGames, numberOfAllRents,
+                numberOfLastMonthRents, amountOfLastMonthEarnedMoney);
     }
 
     @Override

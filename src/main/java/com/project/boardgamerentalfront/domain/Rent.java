@@ -1,11 +1,8 @@
 package com.project.boardgamerentalfront.domain;
 
-import com.project.boardgamerentalfront.service.GameService;
-import com.project.boardgamerentalfront.service.UserService;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Objects;
 
 public class Rent {
     private Long rentId;
@@ -15,17 +12,16 @@ public class Rent {
     private LocalDate endDate;
     private double price;
 
-
     public Rent() {
     }
 
-    public Rent(Long rentId,User user, Game game, LocalDate startDate, LocalDate endDate) {
+    public Rent(Long rentId, User user, Game game, LocalDate startDate, LocalDate endDate) {
         this.rentId = rentId;
         this.user = user;
         this.game = game;
         this.startDate = startDate;
         this.endDate = endDate;
-        price = game.getPrice()* Double.valueOf(ChronoUnit.DAYS.between(startDate,endDate));
+        price = game.getPrice() * Double.valueOf(ChronoUnit.DAYS.between(startDate, endDate));
     }
 
     public Long getRentId() {
@@ -81,7 +77,9 @@ public class Rent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rent rent = (Rent) o;
-        return Double.compare(rent.price, price) == 0 && Objects.equals(user, rent.user) && Objects.equals(game, rent.game) && Objects.equals(startDate, rent.startDate) && Objects.equals(endDate, rent.endDate);
+        return Double.compare(rent.price, price) == 0 && Objects.equals(user, rent.user) &&
+                Objects.equals(game, rent.game) && Objects.equals(startDate, rent.startDate) &&
+                Objects.equals(endDate, rent.endDate);
     }
 
     @Override

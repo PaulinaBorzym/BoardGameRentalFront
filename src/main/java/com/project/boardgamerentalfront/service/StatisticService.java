@@ -34,38 +34,51 @@ public class StatisticService {
         return statistics;
     }
 
-
     public int getNumberOfUsers() {
-        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfUsers", Integer.class);
-        return rs.getBody();
-    }
-    public int getNumberOfGames() {
-        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfGames", Integer.class);
-        return rs.getBody();
-    }
-    public int getNumberOfAllRents() {
-        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfAllRents", Integer.class);
-        return rs.getBody();
-    }
-    public int getNumberOfLastMonthRents() {
-        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastMonthRents", Integer.class);
-        return rs.getBody();
-    }
-    public int getNumberOfLastWeekRents() {
-        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastWeekRents", Integer.class);
-        return rs.getBody();
-    }
-    public double getAmountOfAllEarnedMoney() {
-        ResponseEntity<Double> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfAllEarnedMoney", Double.class);
-        return rs.getBody();
-    }
-    public double getAmountOfLastMonthEarnedMoney() {
-        ResponseEntity<Double> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastMonthEarnedMoney", Double.class);
-        return rs.getBody();
-    }
-    public double getAmountOfLastWeekEarnedMoney() {
-        ResponseEntity<Double> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastWeekEarnedMoney", Double.class);
+        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfUsers",
+                Integer.class);
         return rs.getBody();
     }
 
+    public int getNumberOfGames() {
+        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfGames",
+                Integer.class);
+        return rs.getBody();
+    }
+
+    public int getNumberOfAllRents() {
+        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfAllRents",
+                Integer.class);
+        return rs.getBody();
+    }
+
+    public int getNumberOfLastMonthRents() {
+        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastMonthRents",
+                Integer.class);
+        return rs.getBody();
+    }
+
+    public int getNumberOfLastWeekRents() {
+        ResponseEntity<Integer> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastWeekRents",
+                Integer.class);
+        return rs.getBody();
+    }
+
+    public double getAmountOfAllEarnedMoney() {
+        ResponseEntity<Double> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfAllEarnedMoney",
+                Double.class);
+        return rs.getBody();
+    }
+
+    public double getAmountOfLastMonthEarnedMoney() {
+        ResponseEntity<Double> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastMonthEarnedMoney",
+                Double.class);
+        return rs.getBody();
+    }
+
+    public double getAmountOfLastWeekEarnedMoney() {
+        ResponseEntity<Double> rs = restTemplate.getForEntity("http://localhost:8080/v1/statistic/numberOfLastWeekEarnedMoney",
+                Double.class);
+        return rs.getBody();
+    }
 }

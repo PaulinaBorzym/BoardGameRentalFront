@@ -5,14 +5,12 @@ import com.project.boardgamerentalfront.domain.BookCall;
 import com.project.boardgamerentalfront.domain.Game;
 import com.project.boardgamerentalfront.domain.Rent;
 import com.project.boardgamerentalfront.domain.User;
-import com.project.boardgamerentalfront.enums.GameType;
 import com.project.boardgamerentalfront.service.BookCallService;
 import com.project.boardgamerentalfront.service.GameService;
 import com.project.boardgamerentalfront.service.RentService;
 import com.project.boardgamerentalfront.service.UserService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -25,28 +23,23 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 public class RentForm extends FormLayout {
     private MainView mainView;
     private ComboBox<User> user = new ComboBox<>("Users");
     private ComboBox<Game> game = new ComboBox<>("Game");
-    DatePicker startDate = new DatePicker("Start date");
-    DatePicker endDate = new DatePicker("End date");
-    DatePicker bookDate = new DatePicker("Call date");
+    private DatePicker startDate = new DatePicker("Start date");
+    private DatePicker endDate = new DatePicker("End date");
+    private DatePicker bookDate = new DatePicker("Call date");
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
     private Button edit = new Button("Edit");
     private Button accept = new Button("Book a call");
     private RentService service = RentService.getInstance();
     private BookCallService bookCallService = BookCallService.getInstance();
-
     private UserService userService = UserService.getInstance();
-
     private GameService gameService = GameService.getInstance();
     private Binder<Rent> binder = new Binder<Rent>(Rent.class);
-    private Binder<BookCall> bookCallBinder = new Binder<BookCall>(BookCall.class);
     private CheckboxGroup<String> checkboxGroup = new CheckboxGroup<>();
-
 
     public RentForm(MainView mainView) {
         user.setItems(UserService.getInstance().getUsers());
@@ -100,7 +93,6 @@ public class RentForm extends FormLayout {
 
     public void setRent(Rent rent) {
         binder.setBean(rent);
-
         if (rent == null) {
             setVisible(false);
         } else {

@@ -66,7 +66,8 @@ public class BookCall {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookCall bookCall = (BookCall) o;
-        return Objects.equals(bookCallId, bookCall.bookCallId) && Objects.equals(bookDate, bookCall.bookDate) && Objects.equals(phoneNumber, bookCall.phoneNumber) && Objects.equals(title, bookCall.title);
+        return Objects.equals(bookCallId, bookCall.bookCallId) && Objects.equals(bookDate, bookCall.bookDate) &&
+                Objects.equals(phoneNumber, bookCall.phoneNumber) && Objects.equals(title, bookCall.title);
     }
 
     @Override

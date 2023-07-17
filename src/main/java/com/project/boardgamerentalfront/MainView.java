@@ -17,7 +17,6 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.Objects;
 
 @Route
@@ -160,7 +159,6 @@ public class MainView extends VerticalLayout {
         monthStatisticGrid.setSizeFull();
         monthStatisticContent.setSizeFull();
         bookCallGrid.setSizeFull();
-        ;
         bookCallContent.setSizeFull();
 
         add(toolbar, mainContent);

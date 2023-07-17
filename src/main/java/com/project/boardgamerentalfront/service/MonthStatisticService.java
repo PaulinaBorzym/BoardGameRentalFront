@@ -3,7 +3,6 @@ package com.project.boardgamerentalfront.service;
 import com.project.boardgamerentalfront.domain.MonthStatistic;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;

@@ -4,7 +4,6 @@ import com.project.boardgamerentalfront.domain.Statistic;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-
 public class StatisticService {
     private final RestTemplate restTemplate = new RestTemplate();
     private Statistic statistics;

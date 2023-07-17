@@ -1,12 +1,10 @@
 package com.project.boardgamerentalfront.service;
 
 import org.springframework.web.client.RestTemplate;
-
 import java.util.Objects;
 
 public class CurrencyService {
     private final RestTemplate restTemplate = new RestTemplate();
-
     private static CurrencyService currencyService;
 
     private CurrencyService() {

@@ -18,7 +18,6 @@ import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.data.binder.Binder;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -63,7 +62,6 @@ public class RentForm extends FormLayout {
         BookCall bookCall = new BookCall(bookDate.getValue(), user.getValue().getPhoneNumber(), game.getValue().getTitle());
         bookCallService.save(bookCall);
         mainView.refresh();
-        refreshComboBox();
     }
 
     private void save() {
@@ -99,7 +97,6 @@ public class RentForm extends FormLayout {
             setVisible(true);
             user.focus();
         }
-        refreshComboBox();
     }
 
     public void refreshComboBox() {

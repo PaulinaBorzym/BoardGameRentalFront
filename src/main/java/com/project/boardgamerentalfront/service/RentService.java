@@ -3,7 +3,6 @@ package com.project.boardgamerentalfront.service;
 import com.project.boardgamerentalfront.domain.Rent;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,7 +11,6 @@ public class RentService {
     private final RestTemplate restTemplate = new RestTemplate();
     private Set<Rent> rents;
     private static RentService rentService;
-
 
     private RentService() {
         this.rents = getRents();
